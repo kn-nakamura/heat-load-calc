@@ -9,7 +9,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-interface GridEditorProps<T extends Record<string, unknown>> {
+interface GridEditorProps<T extends object> {
   title: string;
   rows: T[];
   columns: ColDef<T>[];
@@ -32,11 +32,11 @@ function isEmptyValue(value: unknown): boolean {
   return false;
 }
 
-function isRowEmpty<T extends Record<string, unknown>>(row: T): boolean {
-  return Object.values(row).every((value) => isEmptyValue(value));
+function isRowEmpty<T extends object>(row: T): boolean {
+  return Object.values(row as Record<string, unknown>).every((value) => isEmptyValue(value));
 }
 
-export default function GridEditor<T extends Record<string, unknown>>({
+export default function GridEditor<T extends object>({
   title,
   rows,
   columns,
