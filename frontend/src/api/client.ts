@@ -1,8 +1,10 @@
 import axios from "axios";
 import type { CalcResult, Project } from "../types";
 
+const API_ORIGIN = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/+$/, "") ?? "http://localhost:8000";
+
 const api = axios.create({
-  baseURL: "http://localhost:8000/v1"
+  baseURL: `${API_ORIGIN}/v1`
 });
 
 export const runCalculation = async (project: Project): Promise<CalcResult> => {
